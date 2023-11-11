@@ -32,9 +32,9 @@ module.exports = {
     }
   ],
   "plugins": [
-    [
-      "@electron-forge/plugin-webpack",
-      {
+    {
+      "name": "@electron-forge/plugin-webpack",
+      "config": {
         "mainConfig": "./webpack.main.config.js",
         "renderer": {
           "config": "./webpack.renderer.config.js",
@@ -42,12 +42,15 @@ module.exports = {
             {
               "html": "./src/index.html",
               "js": "./src/renderer.ts",
-              "name": "main_window"
+              "name": "main_window",
+              "preload": {
+                "js": "./src/preload.ts"
+              }
             }
           ]
         }
       }
-    ]
+    }
   ],
   "hooks": {
     "postMake": async (_, makeResults) => {
